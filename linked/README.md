@@ -3,7 +3,7 @@
 
 本文介绍什么是链表，常见的链表有哪些，然后介绍链表这种数据结构会在哪些地方可以用到，以及 Redis 队列是底层的实现，通过一个小实例来演示 Redis 队列有哪些功能，最后通过 Go 实现一个双向链表。
 
-![链表](https://img.mukewang.com/5d8191630001181a16320862.png)
+![链表](https://img.mukewang.com/5d820e2100014a2d20360992.png)
 
 ## 目录
 - [1、链表](#1链表)
@@ -137,7 +137,7 @@ LPOP commodity:queue
 
 ### 3.2 实现
 
-![golang 双向链表](https://img.mukewang.com/5d819196000119d720580932.png)
+![golang 双向链表](https://img.mukewang.com/5d820e2100014a2d20360992.png)
 
 - 节点定义
 
