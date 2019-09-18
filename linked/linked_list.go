@@ -132,7 +132,7 @@ func (l *List) LPop() (node *ListNode) {
 // 查不到节点则返回空
 func (l *List) Index(index int) (node *ListNode) {
 
-	// 索引为复数从表尾开始查找
+	// 索引为负数从表尾开始查找
 	if index < 0 {
 		index = (-index) - 1
 		node = l.tail
