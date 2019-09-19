@@ -141,7 +141,7 @@ LPOP commodity:queue
 
 - 节点定义
 
-```
+```golang
 // 链表的一个节点
 type ListNode struct {
     prev  *ListNode // 前一个节点
@@ -186,7 +186,7 @@ func (n *ListNode) GetValue() (value string) {
 
 - 定义一个链表
 
-```
+```golang
 // 链表
 type List struct {
     head *ListNode // 表头节点
@@ -226,7 +226,7 @@ func (l *List) Len() (len int) {
 
 - 在链表的右边插入一个元素
 
-```
+```golang
 // 在链表的右边插入一个元素
 func (l *List) RPush(value string) {
 
@@ -252,7 +252,7 @@ func (l *List) RPush(value string) {
 
 - 从链表左边取出一个节点
 
-```
+```golang
 // 从链表左边取出一个节点
 func (l *List) LPop() (node *ListNode) {
 
@@ -283,7 +283,7 @@ func (l *List) LPop() (node *ListNode) {
 
 自然数和负数索引分别通过两种方式查找节点，找到指定索引或者是链表全部查找完则结束
 
-```
+```golang
 // 通过索引查找节点
 // 查不到节点则返回空
 func (l *List) Index(index int) (node *ListNode) {
@@ -321,7 +321,7 @@ func (l *List) Index(index int) (node *ListNode) {
 
 - 返回指定区间的元素
 
-```
+```golang
 // 返回指定区间的元素
 func (l *List) Range(start, stop int) (nodes []*ListNode) {
     nodes = make([]*ListNode, 0)
