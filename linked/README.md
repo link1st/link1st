@@ -132,8 +132,7 @@ LPOP commodity:queue
 ## 3、Go双向链表
 ### 3.1 说明
 
-
-用Go语言实现一个双向链表，并实现在链表右边插入数据，在链表左边取数据实现 Redis 列表的 (RPUSH、LRANGE、LPOP、LLEN)等功能。
+这里只是用 Go 语言实现一个双向链表，实现：查询链表的长度、链表右端插入数据、左端取数据、取指定区间的节点等功能（ Redis 列表的中的 RPUSH、LRANGE、LPOP、LLEN功能 ）。
 
 ### 3.2 实现
 
