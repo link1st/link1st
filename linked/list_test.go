@@ -73,3 +73,19 @@ func TestList_Range(t *testing.T) {
 	fmt.Println("Range", printNode(list.Range(-2, 3)))
 
 }
+
+func TestList_LPop(t *testing.T) {
+	list := NewList()
+
+	list.RPush("1001")
+	list.RPush("1002")
+	list.RPush("1003")
+	list.RPush("1004")
+
+	fmt.Println("Range", printNode(list.Range(0, -1)))
+	fmt.Println("pop", list.LPop().GetValue())
+	fmt.Println("pop", list.LPop().GetValue())
+	fmt.Println("pop", list.LPop().GetValue())
+	fmt.Println("pop", list.LPop().GetValue())
+	fmt.Println("pop", list.LPop().GetValue())
+}
