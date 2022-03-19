@@ -15,12 +15,12 @@
 - [参考文献](#参考文献)
 
 ## 多模块工作区
-### 说明
+#### 说明
 - go 使用的是多模块工作区，可以让开发者更容易同时处理多个模块的开发。在 Go 1.17 之前，只能使用 `go.mod replace` 指令来实现，如果你正巧是同时进行多个模块的开发，使用它可能是很痛苦的。每次当你想要提交代码的时候，都不得不删除掉 **go.mod** 中的 `replace` 才能使模块稳定发布版本。
 - 在使用 go 1.18 多模块工作区功能的时候，就使用这项工作变得简单容易处理。下面我来介绍怎么使用这以功能。
 - [Go 多模块工作区文档、代码示例](https://github.com/link1st/link1st/tree/master/workspaces)
 
-### 使用条件
+#### 使用条件
 
 - 首先 我们需要 go 1.18 或更高版本 [go 安装](https://go.dev/doc/install)
 
@@ -30,7 +30,7 @@
 go version go1.18 darwin/amd64
 ```
 
-### `go work` 支持命令
+#### `go work` 支持命令
 
 - 通常情况下，建议不要提交 **go.work** 文件到 git 上，因为它主要用于本地代码开发。
 - 推荐在: `$GOPATH` 路径下执行，生成 **go.work** 文件
@@ -68,7 +68,7 @@ go version go1.18 darwin/amd64
 $GOPATH/src/link1st/link1st/workspaces/go.work
 ```
 
-### **go.work** 文件结构
+#### **go.work** 文件结构
 - 文件结构和 **go.mod** 文件结构类似，支持的 Go 版本号、指定工作区和需要替换的仓库
 - 文件结构示例:
 
@@ -86,7 +86,7 @@ replace (
 
 ```
 
-#### `use` 指定使用的模块目录
+##### `use` 指定使用的模块目录
 
 - 可以使用 `go work use <command>` 添加模块，也可以手动修改 **go.work** 工作区添加新的模块
 - 在工作区中添加了模块路径，编译的时候会自动使用 **use** 中的本地代码进行代码编译，和 `replaces` 功能类似。
@@ -102,7 +102,7 @@ use (
 )
 ```
 
-#### `replaces` 替换依赖仓库地址
+##### `replaces` 替换依赖仓库地址
 
 - `replaces` 命令与 **go.mod** 指令相同，用于替换项目中依赖的仓库地址
 - 需要注意的是 `replaces` 和 `use`  不能同时指定相同的本地路径  
@@ -129,7 +129,7 @@ replace (
 
 ```
 
-#### **go.work** 文件优先级高于 **go.mod** 中定义
+##### **go.work** 文件优先级高于 **go.mod** 中定义
 
 - 在同时使用 **go.work** 和 **go.mod** `replace` 功能的的时候分别指定不同的代码仓库路径，**go.work** 优先级高于 **go.mod** 中定义
 
@@ -152,7 +152,7 @@ replace (
 - 在代码构建时候使用的是 **go.work**  指定的 **example1** 仓库的代码，**go.work** 优先级别更高
 
 
-### 如何使用
+#### 如何使用
 - 在 Go 1.18 `go run` 和 `go build` 都会默认使用工作区功能
 - `GOWORK` 也可以指定配置 **go.work** 文件位置
 
@@ -160,7 +160,7 @@ replace (
 export GOWORK="~/go/src/test/go.18/workspace/go.work"
 ```
 
-### 如何禁用工作区
+#### 如何禁用工作区
 - Go 全局变量 `GOWORK` 设置 `off` 则可以禁用工作区功能
 > `export GOWORK=off`
 
@@ -316,12 +316,13 @@ DLROW OLLEH
 
 ## 参考文献
 
+[link1st workspaces](https://github.com/link1st/link1st/tree/master/workspaces)
+
 [Go 1.18 is released!](https://go.dev/blog/go1.18)
 
 [Tutorial: Getting started with multi-module workspaces](https://go.dev/doc/tutorial/workspaces)
 
 [go-1.18-features](https://sebastian-holstein.de/post/2021-11-08-go-1.18-features/)
 
-[link1st workspaces](https://github.com/link1st/link1st/tree/master/workspaces)
 
 
