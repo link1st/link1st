@@ -5,7 +5,7 @@
 
 - 关于泛型网上已经有很多介绍的教程了，这里我介绍一个实用的功能，多模块工作区的使用方法和教程。
 - Go 多模块工作区能够使开发者能够更容易地同时处理多个模块的工作，如: 
-> 方便进行依赖的代码调试(打断点、修改代码)、排查依赖代码 bug
+> 方便进行依赖的代码调试(打断点、修改代码)、排查依赖代码 bug  
 > 方便同时进行多个个依赖仓库进行同时开发调试
 
 
@@ -13,6 +13,7 @@
 ### 说明
 - go 使用的是多模块工作区，可以让开发者更容易同时处理多个模块的开发。在 Go 1.17 之前，只能使用 `go.mod replace` 指令来实现，如果你正巧是同时进行多个模块的开发，使用它可能是很痛苦的。每次当你想要提交代码的时候，都不得不删除掉 **go.mod** 中的 `replace` 才能使模块稳定发布版本。
 - 在使用 go 1.18 多模块工作区功能的时候，就使用这项工作变得简单容易处理。下面我来介绍怎么使用这以功能。
+- [Go 多模块工作区文档、代码示例](https://github.com/link1st/link1st/tree/master/workspaces)
 
 ### 使用条件
 
@@ -24,44 +25,43 @@
 go version go1.18 darwin/amd64
 ```
 
-### `go work` 支持命令参数
+### `go work` 支持命令
 
 - 通常情况下，建议不要提交 **go.work** 文件到 git 上，因为它主要用于本地代码开发。
 - 推荐在: `$GOPATH` 路径下执行，生成 **go.work** 文件
 
 - `go work init` 初始化工作区文件，用于生成 **go.work** 工作区文件
-> 初始化并写入一个新的 **go.work** 到当前路径下，可以指定需要添加的代码模块
-> 示例: `go work init  ./hello` 将本地仓库 **hello** 添加到工作区
-> **hello** 仓库必须是 go mod 依赖管理的仓库(**./hello/go.mod** 文件必须存在)
+> 初始化并写入一个新的 **go.work** 到当前路径下，可以指定需要添加的代码模块  
+> 示例: `go work init  ./hello` 将本地仓库 **hello** 添加到工作区  
+> **hello** 仓库必须是 go mod 依赖管理的仓库(**./hello/go.mod** 文件必须存在)  
 
 - `go work use` 添加新的模块到工作区
-> 命令示例:
-> `go work use ./example` 添加一个模块到工作区
-> `go work use ./example ./example1` 添加多个模块到工作区
-> `go work use -r ./example` 递归 **./example** 目录到当前工作区
-> 删除命令使用 `go work edit -dropuse=./example` 功能
+> 命令示例:  
+> `go work use ./example` 添加一个模块到工作区  
+> `go work use ./example ./example1` 添加多个模块到工作区  
+> `go work use -r ./example` 递归 **./example** 目录到当前工作区  
+> 删除命令使用 `go work edit -dropuse=./example` 功能  
 
 - `go work edit` 用于编辑 **go.work** 文件
-> 也可以手动编辑 **go.work** 文件
-> 示例:
-> `go work edit -fmt go.work` 重新格式化 **go.work** 文件
-> `go work edit -replace=github.com/link1st/example=./example go.work` 替换代码模块
-> `go work edit -dropreplace=github.com/link1st/example` 删除替换代码模块
-> `go work edit -use=./example go.work` 添加新的模块到工作区
-> `go work edit -dropuse=./example go.work` 从工作区中删除模块
+> 可以使用 `edit` 命令编辑和手动编辑 `go.work` 文件效果是相同的
+> 示例:  
+> `go work edit -fmt go.work` 重新格式化 **go.work** 文件  
+> `go work edit -replace=github.com/link1st/example=./example go.work` 替换代码模块  
+> `go work edit -dropreplace=github.com/link1st/example` 删除替换代码模块  
+> `go work edit -use=./example go.work` 添加新的模块到工作区  
+> `go work edit -dropuse=./example go.work` 从工作区中删除模块  
 
 - `go work sync` 将工作区的构建列表同步回
 工作区的模块
 
 - `go env GOWORK`
-> 查看环境变量，查看当前工作区文件
-> 可以排查工作区文件是否设置正确，**go.work** path 找不可以使用 GOWORK 指定
+> 查看环境变量，查看当前工作区文件路径
+> 可以排查工作区文件是否设置正确，**go.work** path 找不可以使用 GOWORK 指定  
 
 ```
 > go env GOWORK
 $GOPATH/src/link1st/link1st/workspaces/go.work
 ```
-
 
 ### **go.work** 文件结构
 - 文件结构和 **go.mod** 文件结构类似，支持的 Go 版本号、指定工作区和需要替换的仓库
@@ -81,17 +81,16 @@ replace (
 
 ```
 
+#### `use` 指定使用的模块目录
 
-#### use 指定使用的工作区
-
-- 可以使用 `go mod use <command>` 添加工作区，也可以手动修改 **go.work** 添加新的工作区
+- 可以使用 `go work use <command>` 添加模块，也可以手动修改 **go.work** 工作区添加新的模块
 - 在工作区中添加了模块路径，编译的时候会自动使用 **use** 中的本地代码进行代码编译，和 `replaces` 功能类似。
 
 ```
-# 只有一个工作区
+# 单模块结构
 use ./hello
 
-# 多个工作区
+# 多模块结构
 use (
     ./hello
     ./example
@@ -101,11 +100,15 @@ use (
 #### `replaces` 替换依赖仓库地址
 
 - `replaces` 命令与 **go.mod** 指令相同，用于替换项目中依赖的仓库地址
-- 需要注意的是 `replaces` 和 `use`  不能同时指定相同的本地路径
-> 同时指定报错信息: go: workspace module github.com/link1st/example is replaced at all versions in the go.work file. To fix, remove the replacement from the go.work file or specify the version at which to replace the module.
+- 需要注意的是 `replaces` 和 `use`  不能同时指定相同的本地路径  
 
-- 错误示例: 
-> 同时在 `use` 和 `replace` 指定相同的本地路径
+
+> 同时指定报错信息:   
+> go: workspace module github.com/link1st/example is replaced at all versions in the go.work file. To fix, remove the replacement from the go.work file or specify the version at which to replace the module.  
+
+- 错误示例   
+
+> 同时在 `use` 和 `replace` 指定相同的本地路径  
 
 ```
 go 1.18
@@ -125,7 +128,7 @@ replace (
 
 - 在同时使用 **go.work** 和 **go.mod** `replace` 功能的的时候分别指定不同的代码仓库路径，**go.work** 优先级高于 **go.mod** 中定义
 
->  **go.mod** 中定义替换为本地仓库 **example**
+> **go.mod** 中定义替换为本地仓库 **example**
 
 ```
 replace (
@@ -145,7 +148,7 @@ replace (
 
 
 ### 如何使用
-- 在 `go run` 和 `go build` 都会默认使用工作区
+- 在 Go 1.18 `go run` 和 `go build` 都会默认使用工作区功能
 - `GOWORK` 也可以指定配置 **go.work** 文件位置
 
 ```
@@ -292,13 +295,18 @@ func main() {
 }
 ```
 
-- 运行
+- 运行代码
+> 可以看到输出了反转并 **大写** 的字符串，大写的函数功能只在本地，未提交到 git 上
 
 ```
 go run main.go -str "hello world"
 DLROW OLLEH
 ```
 
+- 到这里，演示的代码已经全部完成
+
+## 总结
+- 使用 Go 多模块工作区的功能，可以让我们轻松在多个模块之间切换工作，更能适应现代微服务架构开发。
 
 
 ## 参考文献
@@ -308,3 +316,7 @@ DLROW OLLEH
 [Tutorial: Getting started with multi-module workspaces](https://go.dev/doc/tutorial/workspaces)
 
 [go-1.18-features](https://sebastian-holstein.de/post/2021-11-08-go-1.18-features/)
+
+[link1st workspaces](https://github.com/link1st/link1st/tree/master/workspaces)
+
+
