@@ -1,8 +1,6 @@
 go 1.18
 
 use (
-	./example1
+	./example
 	./hello
 )
-
-// replace github.com/link1st/example => ./example
