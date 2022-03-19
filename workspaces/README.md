@@ -1,4 +1,4 @@
-## go 多模块工作区教程
+## Go 1.18 新特性多模块工作区教程
 
 ## 导读
 - 随着 2020 年 3 月 15 日 go 1.18 正式发布，新版本除了对性能的提升之外，还引入了很多新功能，其中就有 go 期盼已久的功能泛型，同时还引入的多模块工作区和模糊测试。
@@ -6,7 +6,7 @@
 - 关于泛型网上已经有很多介绍的教程了，这里我介绍一个实用的功能，多模块工作区的使用方法和教程。
 - Go 多模块工作区能够使开发者能够更容易地同时处理多个模块的工作，如: 
 > 方便进行依赖的代码调试(打断点、修改代码)、排查依赖代码 bug  
-> 方便同时进行多个个依赖仓库进行同时开发调试
+> 方便同时进行多个仓库/模块并行开发调试
 
 ## 目录
 - [多模块工作区](#多模块工作区)
@@ -88,7 +88,7 @@ replace (
 
 ##### `use` 指定使用的模块目录
 
-- 可以使用 `go work use <command>` 添加模块，也可以手动修改 **go.work** 工作区添加新的模块
+- 可以使用 `go work use hello` 添加模块，也可以手动修改 **go.work** 工作区添加新的模块
 - 在工作区中添加了模块路径，编译的时候会自动使用 **use** 中的本地代码进行代码编译，和 `replaces` 功能类似。
 
 ```
@@ -242,7 +242,7 @@ git clone git@github.com:link1st/example.git
 
 - **vim example/stringutil/to_upper.go** 代码如下
 
-```
+```go
 // Package stringutil stringutil
 package stringutil
 
@@ -285,7 +285,7 @@ use (
 
 - 回到 **hello** 项目，`vim main.go` 将字符串大写的功能添加上。
 
-```
+```go
 func main() {
     ...
 
@@ -316,13 +316,11 @@ DLROW OLLEH
 
 ## 参考文献
 
-[link1st workspaces](https://github.com/link1st/link1st/tree/master/workspaces)
+[Go 1.18 新特性多模块工作区教程](https://github.com/link1st/link1st/tree/master/workspaces)
 
 [Go 1.18 is released!](https://go.dev/blog/go1.18)
 
 [Tutorial: Getting started with multi-module workspaces](https://go.dev/doc/tutorial/workspaces)
 
 [go-1.18-features](https://sebastian-holstein.de/post/2021-11-08-go-1.18-features/)
-
-
 
